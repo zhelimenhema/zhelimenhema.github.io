@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Hello World · zhelimenhema&#39;s Studio</title>
+    <title>web安全之文件上传 · zhelimenhema&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >zhelimenhema&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Hello World</a>
+                <a href="#" class="post-name">web安全之文件上传</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Hello World
+            web安全之文件上传
             <!-- 404 -->
             
         </h1>
@@ -264,14 +264,20 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" target="_blank" rel="noopener" data-tags = "web安全,文件上传">web安全,文件上传</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">73</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.7k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/11/27</span>
+                    <span class="post-intro-time">2020/02/21</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,28 +401,36 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure>
+        <p>第一次写技术类的博客嗷。<br>这是一篇关于web渗透文件上传方向的文章。<br>本文是主要以理论方法为主。<br>Start~</p>
+<a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p><strong>一、分析目标架构</strong><br>网站使用什么后端语言？(PHP?ASP？不同语言就不会进行解析) 是什么中间件？(APACHE?nginx?)什么服务器类型？版本？</p>
+<p><strong>二、前端验证</strong><br>查看网站解析器就是看headers里面的Response 那么查查看目标服务器就在网址最后尝试修改index.php成为index.phP 如果主页不变的话目标服务器就是使用windows系统了<br>1、第一个就是直接禁用网站那些过滤文件后缀关键字的功能<br>2、利用burp suite 拦截请求并修改后缀<br>3、直接浏览器禁用Java Script脚本<br>JavaScript是本地做拦截的 所以有JavaScrip拦截不是在服务器端 而是本地端</p>
+<p><strong>三、文件内容检查的突破</strong><br>在黑盒测试中 如果只有一个上传点 无法使用网页源码 这时候就要开始了：<br>1、先随便上传文件 然后查看是否可以上传<br>2、上传一句话木马 文件类型是先php后jpg 绕过content-type 、文件头、getimagesize() php_exit()木块检查<br>content-type：就是修改一下 看看是不是需要改成php或者jpg gif<br>gif和jpg的区别呢就是十六进制方式打开图片之后 文件头判断是不是gif89A<br>在上传了gif或者是jpg之后 如果不能直接在网站路径中访问这个图片文件 因为在文件头中添加了GIF89A之后 网站会自动帮你解析成为了GIF后缀  那么就利用文件包含 就是在已知的页面中传递一个参数 index.php?filename=1.jpg来进行文件包含读取 进行一句话木马的利用<br>3、二次渲染<br>二次渲染就是网站根据用户上传的图片 新生成一个图片 将原始的图片删除 将新的图片加到数据库中。比如说网站会根据用户上传的头像生成大中小3个size的图像<br>理论上就是查找一下裁剪之后都是一样的地方 然后写入一句话木马</p>
+<p>而在文件拓展名里面呢 主要由白名单和黑名单验证突破<br>MIME类型绕过 也就是content-type验证</p>
+<p>00阶段绕过：<br>条件是php版本要小于5.3.4 magic_quotes_gpc为off状态 在进行抓包的时候 文件名字可以改成：1.php%001.jpg<br>1.php是我们想要上传的文件 然后在后面补上了%001.jpg 是因为读取到%00就不会再读取了 但是服务器有可能读取后几位 所以就可以绕狗<br>所有在路径和命名有关的地方都要去尝试截断<br>假如在文件名后面进行截断之后查看网站上的文件是进行了重命名或者说是改变了文件的格式的话就要找其他的截断点<br>在post型上传的时候 就不会对%进行处理 那么就会乱码 但是不是看请求头中的POST或者是GET方式 所以我们是不知道什么方式的<br>那么这时候就在burpsuite中hex选项中把1.php后面添加一个00就是截断了<br>一般来说 服务器都不太会对路径进行检测 所以可以优先选择在路径进行截断 而在路径进行截断的时候 要么在请求头路径进行截断 要么在上传的文件上方进行路径截断</p>
+<p><strong>四、解析漏洞绕过白名单限制：</strong><br>思路：无法突破白名单的时候 也无法进行文件包含动作的时候 可以考虑一下解析漏洞：<br>apache服务器双重拓展名<br>1.php.xxx  由于服务器读取后缀是从后往前读取的 按最后一个合法后缀执行 所以只会认为这个文件是.php 那么这里就可以利用burpsuite进行intruder进行爆破处理啦<br>方法：在抓取了上传文件过程包之后 发送到intruder 清除掉所有的变量 然后对文件的后缀名进行添加 添加字典 然后进行爆破 maybe有符合白名单的后缀<br>ASP 的iis6的解析漏洞：<br>就是*.asp;1.jpg<br>iis7/7.5/nginx&lt;8.03：<br>由于php.ini里面默认cgi.fix_pathinfo=1 所以在对其进行访问的时候 在url路径后面直接添加/.php就会把当前文件看作是php文件进行解析<br>比如说：xxxx.com/1.jpg/.php那么这个就是1.php脚本文件了</p>
+<p><strong>五、黑名单绕过</strong><br>操作系统特性<br>1、windows系统对大小写不敏感<br>     同样 文件名中 test.php::$DATA 会在服务器上生成一个test.php的文件 内容和上传的文件相同 并且会被解析<br>     windows下 文件名加入了.,空格,&lt;,-&gt;,&gt;&gt;&gt;,0x81-0xff等字符会被windows自动去除<br>语言特性<br>php：可以解析后缀：php，php5，php3，pHtml等等<br>Jsp：jsp，jHtml等等<br>asp：cer，aSp，asax</p>
+<p>中间件特性<br>解析漏洞：<br>IIS6，IISiis.5iis.0/10<br>nginx<br>tomcat<br>.htaccess 这个是Apache的解析漏洞<br>在进行信息收集的时候 如果发现中间件是iis 就尝试利用解析漏洞进行上传</p>
+<p>代码不严谨<br>1、双写绕过 有些是对某些特定的关键字进行过滤 我们只需要双写关键字就好了<br>2、对于空格、点只做了单次的过滤<br>当然啦 如果要进行自动化测试的话 可以使用<a href="http://gv7.me/articles/2018/make-upload-vul-fuzz-dic/" target="_blank" rel="noopener">http://gv7.me/articles/2018/make-upload-vul-fuzz-dic/</a><br>upload-fuzz-dic-builder 上传漏洞fuzz字典生成脚本!然后就可以用intruder进行批量爆破了 要注意观察 和允许上传的文件后缀名的状态码进行比较 如果一致那么就一般是这个了</p>
+<p>解析漏洞<br>网站分析 <a href="http://www.yunsee.cn" target="_blank" rel="noopener">www.yunsee.cn</a><br>火狐插件 wappalyzer<br>通过查看相应的http请求 会暴露出web服务器类型<br>根据web容器的不同造成解析漏洞的不同</p>
+<p>iis5.x~6.0<br>目录解析漏洞<br>服务器会默认把asp asa目录下的文件都解析成为asp文件 前提是可以控制文件上传的路径和文件名<br>xxx.asp/abc.jpg 那么就是abc.jpg</p>
+<p>文件名解析漏洞<br>就相当于截断 默认是不会解析分号后面的内容 xxx.asp;.jpg</p>
+<p>畸形文件解析漏洞<br>iis6可执行文件还有asa，cer，cdx等等</p>
+<p>IIS7/7.5<br>利用解析图片中的代码上传webshell<br>查看是否开启Fast-CGI模式<br>上传1.jpg 内容：<br><?PHP fputs(fopen('aa.php'),'w'),'<?php eval($_POST[cmd])?>‘;?&gt;<br>这个时候访问1.jpg/.php那么1.jpg就会被解析执行 在网站的后台就会多出一个aa.php 那么就可以拿到webshell了</p>
+<p>Apache<br>不可识别解析后缀<br>这个的主要原理是因为Apache在进行后缀识别的时候 顺序是从右往左的 那么这个时候  如果碰到了不可识别的后缀 那么就会继续向左边推进 知道后缀可识别<br>假设我们上传了一个aa.php.wa  因为wa不在过滤黑名单里面 但是Apache又不认识wa 就会继续向左边推进 那么这时候就会编程了aa.php<br>如果说是白名单限制 由于Apache在进行解析的时候是会人php php3这一类的后缀名 所以就不会对jpg这些进行解析 可以一战</p>
+<p>.htaccess<br>这个文件是Apache服务器中的一个配置文件 负责相关目录下的网页配置 通过.htaccess文件 可以帮助我们实现：网页301重定向 自定义404错误页面、改变文件拓展名、允许/组织特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能<br>这个漏洞适用于目标服务器是apache而且.htaccess文件可以上传成功的情况<br>当.htaccess文件内容是 SetHandler application/x-httpd-php 时 就是设置了当前目录的所有文件都使用PHP进行解析 那么无论上传什么文件 只要文件的内容符合PHP 语法格式 那么就会被执行<br>需要在http.conf 中设置AllowOverride ALL 不能为NULL</p>
+<p>NGINX<br>就是00截断漏洞<br>aa.jpg%00.php</p>
+<p>双文件上传<br>在一些旧的网站上 服务端默认取第二个文件作为真正的上传文件，但是只检测了第一个文件 或者只验证了第一个filename的拓展名</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="http://yoursite.com">zhelimenhema</a>
-            <p>原文链接：<a href="http://yoursite.com/2019/11/27/hello-world/">http://yoursite.com/2019/11/27/hello-world/</a>
-            <p>发表日期：<a href="http://yoursite.com/2019/11/27/hello-world/">November 27th 2019, 9:44:33 pm</a>
-            <p>更新日期：<a href="http://yoursite.com/2019/11/27/hello-world/">November 27th 2019, 9:44:33 pm</a>
+            <p>原文链接：<a href="http://yoursite.com/2020/02/21/web%E5%AE%89%E5%85%A8%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">http://yoursite.com/2020/02/21/web%E5%AE%89%E5%85%A8%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</a>
+            <p>发表日期：<a href="http://yoursite.com/2020/02/21/web%E5%AE%89%E5%85%A8%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">February 21st 2020, 9:49:20 am</a>
+            <p>更新日期：<a href="http://yoursite.com/2020/02/21/web%E5%AE%89%E5%85%A8%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">February 21st 2020, 9:49:20 am</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -424,13 +438,13 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/02/21/web%E5%AE%89%E5%85%A8%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title= "web安全之文件上传">
-                    <div class="nextTitle">web安全之文件上传</div>
-                </a>
-            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/11/27/hello-world/" title= "Hello World">
+                    <div class="prevTitle">Hello World</div>
+                </a>
             
         </li>
     </ul>
@@ -541,7 +555,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
