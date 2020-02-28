@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>zhelimenhema&#39;s Studio</title>
+    <title>WEB安全之XSS · zhelimenhema&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >zhelimenhema&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">WEB安全之XSS</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>zhelimenhema's Studio.</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            WEB安全之XSS
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" target="_blank" rel="noopener" data-tags = "WEB,XSS">WEB,XSS</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.3k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/02/27</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,39 +399,50 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/11/27/hello-world/" >
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
+            <main class="main post-page">
+    <article class="article-entry">
+        <p><strong>XSS</strong><br>    跨站攻击。在网页中植入恶意脚本代码，用简单的脚本就可以获取用户敏感信息。<br>    XST(CrossSiteTracing):将代码嵌入被控制主机上的web文件，访问者浏览网站时，代码在浏览器中执行，然后访问者的cookie、http基本验证和HTML验证信息讲发送到已经被控制的主机。<br>    相比起其他脚本注入，XSS攻击会把插入的脚本保存在被修改的远程WEB页面里面。而跨站脚本是临时执行，执行后就消失了。<br>    防范XSS攻击可以设置服务器，包括硬盘权限、组件安全、IIS用户、服务器安全和性能、本地安全策略和系统服务的设置。禁用guests组用户调用cmd.exe<br>    <strong>旁注攻击</strong><br>     利用同一主机上的不同网站漏洞得到webshell从而通过主机删更多程序或者服务所暴露用户所在物理路径进行入侵。<br>     防范方法：<br>     ①通过设置IIS单用户权限/禁止，来阻止非法用户运行任意的CMD命令，从而使入侵者的旁注入侵在无法提升权限下的失败。<br>     ②利用端口转发技术，如果说要阻止旁注攻击，首先要阻止入侵者得到服务器的IP地址，其架设在主机上的网站，才有安全上的保障。<br>     <strong>同源策略</strong><br>     JS被浏览器认为是不同源时，请求拒绝执行。<br>     端口、协议、子域名、host都是影响“源”的因素。<br>     在<code>&lt;script src = http://b.com/b.js&gt;&lt;/script&gt;</code><br>     可以理解的是a.com通过以上代码加载了b.js，b.js是运行在a.com上的，所以对于a.com来说，b.js的ORIGIN就应该是a.com，而不是b.com。<br>     <code>&lt;script&gt;&lt;img&gt;&lt;iframe&gt;&lt;link&gt;</code><br>     等标签都可以跨域加载资源，不受同源策略的限制。通过“src“加载的资源实际上是由浏览器发起了GET请求。而通过src属性加载的资源，浏览器限制了js的权限，使其不能读、写返回内容。<br>     <strong>XSS</strong><br>     跨站脚本CrossSiteScript。<br>     ①反射型XSS Non-persistent XSS<br>       将用户输入的数据反射给浏览器,需要用户点击恶意连接才能攻击成功。<br>       可以通过反射性XSS修改网页标签中的HREF，替换指定连接。<br>      ②存储型XSS Persistent XSS<br>        将用户输入的数据存储在服务器端，具有稳定性。<br>        在写一篇含有JS恶意代码的博客文章后，文章发表后，所有访问该博客文章的用户，都会在他们的浏览器中执行这段恶意的JS代码。黑客把恶意代码脚本保存在服务器端。<br>       ③DOM Based XSS<br>       这种类型的XSS不是按照数据是否保存在服务器端进行划分的。DOM BASE XSS从效果上也是反射性XSS。<br>       主要思路就是闭合标签然后插入新标签。<br>       攻击者通过加载远程的脚本文件进行用户信息的盗取。<br>       Cookie是用户登录的凭证，浏览器发起的所有请求都会自动带上cookie。<br>       Cookie的“HttpOnly”标识可以防止“Cookie劫持”。<br>       通过GET/POST方式进行XSS入侵。<br>       ④XSS盲打<br>       目光所致，皆为输入！在所有留言板、feedback之类的地方尽可能地尝试XSS语句，这就是盲打。<br>       实战：<br>       在pikachu靶场进行xss演练<br>       反射型、post型和存储型都是没有过滤关键字，所以直接<code>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</code>就好了<br>       在DOM型里面就是闭合标签插入新标签。在审查元素的时候发现onclick函数是执行一个domxss()，那么这个时候就要直接审查源码，查看domxss()，发现是进行了str的拼接，思路就是先闭合前一个单引号，然后闭合前一个标签，再插入一个图片标签，属性是onmouseover,当鼠标移动到图片上面的时候，就会弹出了xss框，注入成功。<br>       轮子：<br>      <code>&lt;img src=&#39;#&#39; onmouse=&quot;alter(&#39;xxs&#39;)&quot;&gt;</code><br>       <code>&lt;img src=0 onmouse=&quot;alter(&#39;xxs&#39;)&quot;&gt;</code><br>       <code>&lt;img src=&#39;#&#39; onerror=&quot;alter(document.cookie&#39;)&quot;&gt;</code><br>       过滤：<br>       ①前端绕过<br>       ②大小写<br>       ③双写<br>       ④<!--1-->注释干扰<br>       在测试过滤的时候，可以输入”&lt;&gt;?#’666 然看后端是怎么处理的，看有没有转码。<br>       在htmlspecialchars()这个函数中，是会把预定义的字符转换成HTML实体的函数，比如说 “转换成&amp;quot &lt;转化成 &amp;It。<br>       href标签中的话，就可以使用JavaScript协议了<br>       playload:javascript:alert(6)<br>       然后点击那个文字就弹框了。<br>        (./images/Image_[2].png)<br>        这个就是注入点了，先闭合上一个script标签，然后就新构造一个script，因为没有作任何过滤，那么就直接弹窗了。<br>               XSS常见playload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(document.cookie))&lt;&#x2F;script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;javascript:alert(111)&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&lt;body onload&#x3D;alert(&#39;xss&#39;)&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;0 onerror &#x3D; alert(1)&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;div onclick&#x3D;&quot;alert(&#39;xss&#39;)&quot;&gt;</span></pre></td></tr></table></figure>
 
-More info: Writing
-Run server1$ hexo server
-
-Mo...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/27</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://yoursite.com">zhelimenhema</a>
+            <p>原文链接：<a href="http://yoursite.com/2020/02/27/webXSS/">http://yoursite.com/2020/02/27/webXSS/</a>
+            <p>发表日期：<a href="http://yoursite.com/2020/02/27/webXSS/">February 27th 2020, 11:24:49 am</a>
+            <p>更新日期：<a href="http://yoursite.com/2020/02/27/webXSS/">February 28th 2020, 8:26:04 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/02/26/web%E5%AE%89%E5%85%A8%E4%B9%8B%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title= "web安全之信息收集">
+                    <div class="prevTitle">web安全之信息收集</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -448,6 +520,24 @@ Mo...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -621,6 +711,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
